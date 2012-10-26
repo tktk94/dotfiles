@@ -20,3 +20,25 @@ set softtabstop=0
 set noexpandtab
 set cindent
 set shiftwidth=4
+set nocompatible
+filetype off
+
+" Vundle
+set rtp+=~/.vim/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+filetype plugin indent on
+
+" plugin on vim-scripts
+Bundle "grep.vim"
+
+" plugin on github
+Bundle "Shougo/neocomplcache"
+Bundle "Shougo/unite.vim"
+Bundle "thinca/vim-ref"
+Bundle "thinca/vim-quickrun"
+Bundle "mattn/zencoding-vim"
+
+" vim-ref
+let $PATH = $PATH . '/usr/local/bin/lynx'
+let g:ref_alc_cmd='http://www.alc.co.jp/'
