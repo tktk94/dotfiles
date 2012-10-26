@@ -38,7 +38,3 @@ Bundle "Shougo/unite.vim"
 Bundle "thinca/vim-ref"
 Bundle "thinca/vim-quickrun"
 Bundle "mattn/zencoding-vim"
-
-" vim-ref
-let $PATH = $PATH . '/usr/local/bin/lynx'
-let g:ref_alc_cmd='http://www.alc.co.jp/'
