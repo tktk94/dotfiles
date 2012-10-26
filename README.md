@@ -1,7 +1,6 @@
-dotfiles
+tkt's dotfiles
+===
 
-Kaoru Takata
+.zshrc
 
-tkt(@tkt_94)
-
-ka0rutkt@gmail.com
+.vimrc
