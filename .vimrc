@@ -48,6 +48,13 @@ Bundle "tpope/vim-markdown"
 Bundle "scrooloose/nerdtree"
 Bundle "kmnk/vim-unite-giti"
 Bundle "fholgado/minibufexpl.vim"
+Bundle "mattn/webapi-vim"
+Bundle "tyru/open-browser.vim"
+Bundle "basyura/twibill.vim"
+Bundle "basyura/bitly.vim"
+Bundle "mattn/favstar-vim"
+Bundle "basyura/TweetVim"
+Bundle "h1mesuke/unite-outline"
 
 " 関数
 

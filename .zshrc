@@ -76,6 +76,7 @@ alias less='less --tabs=4 --LONG-PROMPT --RAW-CONTROL-CHARS --ignore-case'
 alias grep='grep --color=auto'
 alias grepc='grep --color=force'
 alias ps='ps -ael'
+alias su='su -'
 
 # Editor
 if which vim; then
