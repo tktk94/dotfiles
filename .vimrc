@@ -1,6 +1,12 @@
 " .vimrc
 " Kaoru Takata(@tkt_94)
 
+if has('win32') || has('win64')
+  let $DOTVIM = expand('~/vimfiles')
+else
+  let $DOTVIM = expand('~/.vim')
+endif
+
 syntax on
 set hlsearch
 set autoindent
@@ -30,8 +36,8 @@ set wildmode=list,longest,full
 filetype off
 
 " Vundleの設定
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=$DOTVIM/bundle/vundle/
+call vundle#rc('$DOTVIM/bundle')
 Bundle 'gmarik/vundle'
 filetype plugin indent on
 
@@ -40,7 +46,7 @@ Bundle "grep.vim"
 
 " github上のプラグイン
 Bundle "Shougo/neocomplcache"
-Bundle "Shougo/unite.vim"
+Bundle "Shougo/neosnippet"
 Bundle "thinca/vim-ref"
 Bundle "thinca/vim-quickrun"
 Bundle "mattn/zencoding-vim"
@@ -55,6 +61,15 @@ Bundle "basyura/bitly.vim"
 Bundle "mattn/favstar-vim"
 Bundle "basyura/TweetVim"
 Bundle "h1mesuke/unite-outline"
+Bundle "tomasr/molokai"
+Bundle "honza/vim-snippets"
+
+"ホームディレクトリに移動
+cd $DOTVIM
+cd ..
+
+" カラースキーマの設定
+colorscheme molokai
 
 " 関数
 
@@ -93,3 +108,14 @@ noremap <C-H> <C-W>h
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
 noremap <C-L> <C-W>l
+
+"neosnippetの設定
+imap <C-k>	<Plug>(neosnippet_expand_or_jump)
+smap <C-k>	<Plug>(neosnippet_expand_or_jump)
+imap <expr><TAB>	neosnoppet#expandable()	<Bar><bar>	neosnippet#jumpable() ? "\<Plig>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+if has('cancel')
+	set concellevel=2 concealcursor=i
+endif
+
+let g:neosnippet#snippets_derectory='$DOTVIM/bundle/vim-snippets/snippets'
