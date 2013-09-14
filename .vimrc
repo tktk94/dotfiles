@@ -2,9 +2,9 @@
 " Kaoru Takata(@tkt_94)
 
 if has('win32') || has('win64')
-  let $DOTVIM = expand('~/vimfiles')
+	let $DOTVIM = expand('~/vimfiles')
 else
-  let $DOTVIM = expand('~/.vim')
+	let $DOTVIM = expand('~/.vim')
 endif
 
 syntax on
@@ -33,6 +33,8 @@ set helplang=ja
 set hidden
 set autoread
 set wildmode=list,longest,full
+set iminsert=0
+set imsearch=0
 filetype off
 
 " Vundleの設定
@@ -63,38 +65,40 @@ Bundle "basyura/TweetVim"
 Bundle "h1mesuke/unite-outline"
 Bundle "tomasr/molokai"
 Bundle "honza/vim-snippets"
+Bundle "vim-scripts/Wombat"
 
 "ホームディレクトリに移動
-cd $DOTVIM
-cd ..
-
-" カラースキーマの設定
-colorscheme molokai
+cd ~/
 
 " 関数
 
 " 全角スペースを強調させるお（＾ω＾ ≡ ＾ω＾）お）
-function! Zenkaku()
+function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
 
 if has('syntax')
-augroup ZenkakuSpace
-autocmd!
-autocmd ColorScheme       * call ZenkakuSpace()
-autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-augroup END
-call Zenkaku()
+	augroup ZenkakuSpace
+		autocmd!
+		autocmd ColorScheme       * call ZenkakuSpace()
+		autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+	augroup END
+	call ZenkakuSpace()
 endif
 
-" プラグインの設定
 
+"GUIの設定
+"colorscheme molokai
+colorscheme Wombat
+set guifont=Migmix_2M:h10
+" プラグインの設定
+ 
 " NERDTreeの設定
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
-	vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-	omap <silent> <C-e>      :NERDTreeToggle<CR>
-	imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-	cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+    vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+    omap <silent> <C-e>      :NERDTreeToggle<CR>
+    imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+    cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
