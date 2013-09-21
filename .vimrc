@@ -35,19 +35,21 @@ set autoread
 set wildmode=list,longest,full
 set iminsert=0
 set imsearch=0
+set clipboard=unnamed,autoselect
 filetype off
 
 " Vundleの設定
-set rtp+=$DOTVIM/bundle/vundle/
+set rtp+=~/dotfiles/vundle/
 call vundle#rc('$DOTVIM/bundle')
 Bundle 'gmarik/vundle'
 filetype plugin indent on
 
 " vim-scripts上のプラグイン
 Bundle "grep.vim"
+Bundle "lua-support"
 
 " github上のプラグイン
-Bundle "Shougo/neocomplcache"
+Bundle "Shougo/neocomplecache"
 Bundle "Shougo/neosnippet"
 Bundle "thinca/vim-ref"
 Bundle "thinca/vim-quickrun"
@@ -65,12 +67,13 @@ Bundle "basyura/TweetVim"
 Bundle "h1mesuke/unite-outline"
 Bundle "tomasr/molokai"
 Bundle "honza/vim-snippets"
+Bundle "thinca/vim-splash"
 Bundle "vim-scripts/Wombat"
 
 "ホームディレクトリに移動
 cd ~/
 
-" 関数
+" 関数その他
 
 " 全角スペースを強調させるお（＾ω＾ ≡ ＾ω＾）お）
 function! ZenkakuSpace()
@@ -86,6 +89,8 @@ if has('syntax')
 	call ZenkakuSpace()
 endif
 
+"コマンドモード時にEnterで改行入力
+noremap <CR> o<ESC>
 
 "GUIの設定
 "colorscheme molokai
@@ -112,6 +117,51 @@ noremap <C-H> <C-W>h
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
 noremap <C-L> <C-W>l
+
+"neocomplecacheの設定
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "neosnippetの設定
 imap <C-k>	<Plug>(neosnippet_expand_or_jump)
