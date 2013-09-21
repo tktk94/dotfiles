@@ -39,36 +39,44 @@ set clipboard=unnamed,autoselect
 filetype off
 
 " Vundleの設定
-set rtp+=~/dotfiles/vundle/
-call vundle#rc('$DOTVIM/bundle')
-Bundle 'gmarik/vundle'
+"set rtp+=~/dotfiles/vundle/
+"call vundle#rc('$DOTVIM/bundle')
+"Bundle 'gmarik/vundle'
+
+" NeoBundleの設定
+set runtimepath+=~/dotfiles/neobundle.vim
+call neobundle#rc(expand('$DOTVIM/bundle'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+
 filetype plugin indent on
 
 " vim-scripts上のプラグイン
-Bundle "grep.vim"
-Bundle "lua-support"
+NeoBundle "grep.vim"
+NeoBundle "lua-support"
 
 " github上のプラグイン
-Bundle "Shougo/neocomplecache"
-Bundle "Shougo/neosnippet"
-Bundle "thinca/vim-ref"
-Bundle "thinca/vim-quickrun"
-Bundle "mattn/zencoding-vim"
-Bundle "tpope/vim-markdown"
-Bundle "scrooloose/nerdtree"
-Bundle "kmnk/vim-unite-giti"
-Bundle "fholgado/minibufexpl.vim"
-Bundle "mattn/webapi-vim"
-Bundle "tyru/open-browser.vim"
-Bundle "basyura/twibill.vim"
-Bundle "basyura/bitly.vim"
-Bundle "mattn/favstar-vim"
-Bundle "basyura/TweetVim"
-Bundle "h1mesuke/unite-outline"
-Bundle "tomasr/molokai"
-Bundle "honza/vim-snippets"
-Bundle "thinca/vim-splash"
-Bundle "vim-scripts/Wombat"
+NeoBundle "Shougo/neocomplecache"
+NeoBundle "Shougo/neosnippet"
+NeoBundle "thinca/vim-ref"
+NeoBundle "thinca/vim-quickrun"
+NeoBundle "mattn/zencoding-vim"
+NeoBundle "tpope/vim-markdown"
+NeoBundle "scrooloose/nerdtree"
+NeoBundle "kmnk/vim-unite-giti"
+NeoBundle "fholgado/minibufexpl.vim"
+NeoBundle "mattn/webapi-vim"
+NeoBundle "tyru/open-browser.vim"
+NeoBundle "basyura/twibill.vim"
+NeoBundle "basyura/bitly.vim"
+NeoBundle "mattn/favstar-vim"
+NeoBundle "basyura/TweetVim"
+NeoBundle "h1mesuke/unite-outline"
+NeoBundle "tomasr/molokai"
+NeoBundle "honza/vim-snippets"
+NeoBundle "thinca/vim-splash"
+NeoBundle "vim-scripts/Wombat"
+
+NeoBundleCheck
 
 "ホームディレクトリに移動
 cd ~/
