@@ -1,6 +1,6 @@
 "GUI‚Ìİ’è
-set columns=120
-set lines=30
+set columns=100
+set lines=27
 set cmdheight=2
 "colorscheme molokai
 colorscheme Wombat
